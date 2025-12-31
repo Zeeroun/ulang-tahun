@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ucapan Ulang Tahun 🎂</title>
+
+<style>
+body {
+  background: #0f0f0f;
+  color: #ffffff;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 90%;
+  max-width: 500px;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00ffcc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <div id="text"></div>
+  <button id="nextBtn" onclick="nextText()" style="display:none;">
+    Lanjut
+  </button>
+</div>
+
+<!-- MUSIK -->
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c9c4a3c33.mp3?filename=happy-birthday-to-you-12147.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const texts = [
+  "Hai...",
+  "Hari ini bukan hari biasa.",
+  "Hari ini adalah hari ulang tahunmu 🎂",
+  "Semoga selalu sehat.",
+  "Semoga semua doa baik datang kepadamu.",
+  "Selamat ulang tahun 🤍"
+];
+
+let index = 0;
+let charIndex = 0;
+const speed = 50;
+
+const textEl = document.getElementById("text");
+const btn = document.getElementById("nextBtn");
+const audio = document.getElementById("bgm");
+
+function typeText() {
+  if (charIndex < texts[index].length) {
+    textEl.innerHTML += texts[index].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeText, speed);
+  } else {
+    btn.style.display = "block";
+  }
+}
+
+function nextText() {
+  audio.play(); // musik mulai saat klik
+
+  btn.style.display = "none";
+  textEl.innerHTML = "";
+  charIndex = 0;
+  index++;
+
+  if (index < texts.length) {
+    typeText();
+  }
+}
+
+typeText();
+</script>
+
+</body>
+</html>
